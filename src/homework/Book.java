@@ -35,7 +35,7 @@ public class Book {
 
     public void setPublicationYear(int publicationYear) {
         if (publicationYear < 1950 || publicationYear > 2023) {
-            throw new IllegalArgumentException("Неверная дата публиции");
+            throw new IllegalArgumentException("Неверная дата публикации!");
         }
         this.publicationYear = publicationYear;
     }
