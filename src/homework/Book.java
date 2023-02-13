@@ -1,14 +1,16 @@
 package homework;
 
+import java.util.Objects;
+
 public class Book {
-    private static int idCnt; // Счетчик Id
+    private static int idCounter; // Счетчик Id
     private final int id; // Id
     private final String title; // Название
     private final Author author; // Автор
     private int publicationYear; // Год публикации
 
     public Book(String title, Author author, int publicationYear) {
-        this.id = ++idCnt;
+        this.id = ++idCounter;
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
@@ -32,6 +34,9 @@ public class Book {
 
 
     public void setPublicationYear(int publicationYear) {
+        if (publicationYear < 1950 || publicationYear > 2023) {
+            throw new IllegalArgumentException("Неверная дата публикации!");
+        }
         this.publicationYear = publicationYear;
     }
 
@@ -43,5 +48,18 @@ public class Book {
                 ", author=" + author +
                 ", publicationYear=" + publicationYear +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return publicationYear == book.publicationYear && title.equals(book.title) && author.equals(book.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, author, publicationYear);
     }
 }
